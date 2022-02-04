@@ -5,10 +5,11 @@ int main()
 	setlocale(0, "UKR");
 	srand(time(0));
 
-	Student s1("Ваня", "Ванечка", "Ванятко");	
-	
-	s1.PushBackMarks(10);
-	s1.Print();
+	Student s1("Р’Р°СЃРёР»РёР№", "Р’Р°СЃРёР»СЊРµРІРёС‡", "Р’Р°СЃРёР»СЊРµРІ");
 
-	cout << "\n\n";
+	s1.SetMark(10);
+	s1.SetExam(11);
+	s1.SetCoursework(12);
+	
+	cout << s1 <<"\n\n";
 }
