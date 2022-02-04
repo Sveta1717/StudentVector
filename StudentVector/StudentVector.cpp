@@ -1,4 +1,4 @@
-﻿#include "Student.h"
+#include "Student.h"
 
 Date::Date(unsigned short d, unsigned short m, unsigned short y)
 {
@@ -9,12 +9,12 @@ Date::Date(unsigned short d, unsigned short m, unsigned short y)
 
 void Date::SetDay(unsigned short day)
 {
-	if (((month = 1 && day < 32) || (month = 3 && day < 32) || 
+	if (((month = 1 && day < 32) || (month = 3 && day < 32) ||
 		(month = 4 && day < 31) || (month = 5 && day < 32) || (month = 6 && day < 31) ||
 		(month = 7 && day < 32) || (month = 8 && day < 32) || (month = 9 && day < 31) ||
 		(month = 10 && day < 32) || (month = 11 && day < 31) || (month = 12 && day < 32)) &&
-		((month = 2 && day < 29) && (year % 4 != 0 && year % 100 == 0 || year % 400 != 0) || 
-			(month = 2 && day < 30) && (year % 4 == 0 && year % 100 != 0 || year % 400 == 0))) 
+		((month = 2 && day < 29) && (year % 4 != 0 && year % 100 == 0 || year % 400 != 0) ||
+			(month = 2 && day < 30) && (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)))
 	{
 		this->day = day;
 	}
@@ -28,7 +28,7 @@ void Date::SetMonth(unsigned short month)
 
 void Date::SetYear(unsigned short year)
 {
-	if (year > 1930 || year < 2012) 
+	if (year > 1930 || year < 2012)
 		this->year = year;
 }
 
@@ -70,10 +70,10 @@ Student::Student(const char* surname, const char* name, const char* patronymic)
 
 	for (int i = 0; i < counterMarks; i++)
 		marks[i] = 0;
-	
+
 	for (int i = 0; i < counterCoursework; i++)
 		coursework[i] = 0;
-	
+
 	for (int i = 0; i < counterExam; i++)
 		exam[i] = 0;
 }
@@ -88,7 +88,7 @@ Student::Student(char* surname, char* name, char* patronymic, Date date, char* a
 	SetShow(surname, name, patronymic, date, adress, phone);
 }
 
-Student::Student(const char* surname, const char* name, const char* patronymic, Date date, const char* adress, const char* phone) 
+Student::Student(const char* surname, const char* name, const char* patronymic, Date date, const char* adress, const char* phone)
 {
 	SetShow(surname, name, patronymic, date, adress, phone);
 }
@@ -116,27 +116,27 @@ Student::Student(const Student& original)
 	counterMarks = original.counterMarks;
 	counterCoursework = original.counterCoursework;
 	counterExam = original.counterExam;
-	
+
 	for (int i = 0; i < counterMarks; i++)
 		marks[i] = original.marks[i];
-	
+
 	for (int i = 0; i < counterCoursework; i++)
 		coursework[i] = original.coursework[i];
-	
+
 	for (int i = 0; i < counterExam; i++)
 		exam[i] = original.exam[i];
 }
 
-Student::~Student() 
+Student::~Student()
 {
 	if (surname != nullptr)delete[]surname;
 	if (name != nullptr) delete[]name;
 	if (patronymic != nullptr)delete[]patronymic;
 	if (adress != nullptr)delete[]adress;
 	if (phone != nullptr)delete[]phone;
-	//if (marks != nullptr)delete[]marks;
-	//if (coursework != nullptr)delete[]coursework;
-	//if (exam != nullptr)delete[]exam;
+	/*delete[]marks;
+	delete[]coursework;
+	delete[]exam;*/
 }
 
 void Student::SetDate(unsigned short day, unsigned short month, unsigned short year)
@@ -174,17 +174,27 @@ void Student::SetPhone(char* phone)
 
 void Student::SetMark(int value)
 {
-	PushBackMarks(value);
+	if (value < 1 || value>12)
+		return;
+
+	marks.push_back(value);
+	counterMarks++;
 }
 
 void Student::SetCoursework(int value)
 {
-	PushBackCoursework(value);
+	if (value < 1 || value>12)
+		return;
+	coursework.push_back(value);
+	counterCoursework++;
 }
 
 void Student::SetExam(int value)
 {
-	PushBackExam(value);
+	if (value < 1 || value>12)
+		return;
+	exam.push_back(value);
+	counterExam++;
 }
 
 const char* const Student::GetAdress() const
@@ -207,28 +217,27 @@ void Student::Print()
 	cout << "Телефон: " << phone << "\n";
 	cout << "Зачет: ";
 	if (counterMarks > 0)
-	{		
-		for (int i = 0; i < 12; i++)
+	{
+		for (int i = 0; i < 13; i++)
 		{
-			
-			cout << marks[i] << " ";
-		}		
+			cout << marks[i] << " ";			
+		}
 	}
 	cout << "\nКурсовая: ";
 
 	if (counterCoursework > 0)
 	{
-		for (int i = 0; i < counterCoursework; i++)
+		for (int i = 0; i < 13; i++)
 		{
-			cout << coursework[i];
+			cout << coursework[i];			
 		}
 	}
 	cout << "\nЭкзамен: ";
 	if (counterExam > 0)
 	{
-		for (int i = 0; i < counterExam; i++)
+		for (int i = 0; i < 13; i++)
 		{
-			cout << exam[i];
+			cout << exam[i];			
 		}
 	}
 	cout << "\n\n";
@@ -278,39 +287,15 @@ const char* const Student::GetPatronymic() const
 	return patronymic;
 }
 
-void Student::PushBackMarks(int value)
-{
-	if (value < 1 || value>12)
-		return;
-	marks.push_back(value);
-	counterMarks++;
-}
-
-void Student::PushBackCoursework(int value)
-{
-	if (value < 1 || value>12)
-		return;
-	coursework.push_back(value);
-	counterCoursework++;
-}
-
-void Student::PushBackExam(int value)
-{
-	if (value < 1 || value>12)
-		return;
-	exam.push_back(value);
-	counterExam++;
-}
-
 vector<int> Student::GetMarks()
 {
 	return marks;
 }
 
-//vector<int> GetCoursework()
-//{
-//	return  coursework;
-//}
+vector<int> Student::GetCoursework()
+{
+	return  coursework;
+}
 
 vector<int> Student::GetExam()
 {
@@ -358,5 +343,6 @@ bool Student::operator != (Student& second)
 	}
 	return false;
 }
+
 
 
