@@ -38,10 +38,7 @@ public:
 	const char* const GetPhone() const;
 	const char* const GetSurname() const;
 	const char* const GetName() const;
-	const char* const GetPatronymic() const;
-	void PushBackMarks(int value);
-	void PushBackCoursework(int value);
-	void PushBackExam(int value);
+	const char* const GetPatronymic() const;	
 
 	vector<int> GetMarks();
 	vector<int> GetCoursework();
