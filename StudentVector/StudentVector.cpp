@@ -174,7 +174,7 @@ void Student::SetPhone(char* phone)
 
 void Student::SetMark(int value)
 {
-	if (value < 1 || value>12)
+	if ((value < 1 || value>12) && counterMarks >= 5)
 		return;
 
 	marks.push_back(value);
@@ -183,7 +183,7 @@ void Student::SetMark(int value)
 
 void Student::SetCoursework(int value)
 {
-	if (value < 1 || value>12)
+	if ((value < 1 || value>12) && counterMarks >= 5)
 		return;
 	coursework.push_back(value);
 	counterCoursework++;
@@ -191,7 +191,7 @@ void Student::SetCoursework(int value)
 
 void Student::SetExam(int value)
 {
-	if (value < 1 || value>12)
+	if ((value < 1 || value>12) && counterMarks >= 5)
 		return;
 	exam.push_back(value);
 	counterExam++;
