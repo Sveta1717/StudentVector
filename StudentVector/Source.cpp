@@ -6,10 +6,12 @@ int main()
 	srand(time(0));
 
 	Student s1("Василий", "Васильевич", "Васильев");
-
-	s1.SetMark(10);
-	s1.SetExam(11);
-	s1.SetCoursework(12);
+	
+	s1.AddMark(10);
+	s1.AddExam(11);
+	s1.AddCoursework(12);
+	
+	cout << s1 <<"\n\n";
 	
 	cout << s1 <<"\n\n";
 }
