@@ -29,9 +29,9 @@ public:
 	void SetDate(unsigned short day, unsigned short month, unsigned short year);
 	void SetAdress(char* adress);
 	void SetPhone(char* phone);
-	void SetMark(int value);
-	void SetCoursework(int value);
-	void SetExam(int value);
+	void AddMark(unsigned  int value);
+	void AddCoursework(unsigned int value);
+	void AddExam(unsigned int value);
 	void SetShow(const char* surname, const char* name, const char* patronymic, Date date, const char* adress, const char* phone);
 
 	const char* const GetAdress() const;
@@ -40,9 +40,9 @@ public:
 	const char* const GetName() const;
 	const char* const GetPatronymic() const;	
 
-	vector<int> GetMarks();
-	vector<int> GetCoursework();
-	vector<int> GetExam();
+	vector<unsigned int> GetMarks();
+	vector<unsigned int> GetCoursework();
+	vector<unsigned int> GetExam();
 	
 	bool operator > (Student& second);
 	bool operator < (Student& second);
